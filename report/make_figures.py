@@ -116,7 +116,54 @@ def fig_overlay(stem=None):
     fig.savefig(os.path.join(OUT, "fig_overlay.png"), dpi=300, bbox_inches="tight", pad_inches=0.05)
 
 
+def fig_pipeline():
+    """End-to-end data pipeline: training branch (top) and inference branch (bottom)."""
+    from matplotlib.patches import FancyBboxPatch
+    fig, ax = plt.subplots(figsize=(7.0, 2.35))
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 34)
+    ax.axis("off")
+
+    def box(x, y, w, text, accent=False):
+        ax.add_patch(FancyBboxPatch((x, y), w, 9, boxstyle="round,pad=0.25,rounding_size=1.2",
+                                    facecolor="#e8f1fb" if accent else "#f1f0ec",
+                                    edgecolor=BLUE if accent else "#b8b6af", linewidth=1))
+        ax.text(x + w / 2, y + 4.5, text, ha="center", va="center", fontsize=5.9, color=INK, linespacing=1.25)
+        return x, y, w
+
+    def arrow(a, b):
+        (xa, ya, wa), (xb, yb, wb) = a, b
+        if abs(ya - yb) < 1:
+            ax.annotate("", (xb - 0.6, yb + 4.5), (xa + wa + 0.6, ya + 4.5),
+                        arrowprops=dict(arrowstyle="-|>", color=INK2, lw=0.9, shrinkA=0, shrinkB=0))
+        else:
+            ax.annotate("", (xb + wb / 2, yb + 9.4), (xa + wa / 2, ya - 0.4),
+                        arrowprops=dict(arrowstyle="-|>", color=INK2, lw=0.9, shrinkA=0, shrinkB=0))
+
+    ax.text(0.5, 32.5, "Training", fontsize=7.5, fontweight="bold", color=INK2)
+    ax.text(0.5, 13.5, "Inference", fontsize=7.5, fontweight="bold", color=INK2)
+    t1 = box(0.5, 21, 15, "COCO polygons\n1–3 annotation\nsets per image")
+    t2 = box(19.5, 21, 15, "Soft target:\nfraction of\nannotators")
+    t3 = box(38.5, 21, 17, "5-fold CV by image\n1024 px, 768 crops\nBCE + 0.5 Dice", accent=True)
+    t4 = box(59.5, 21, 18, "U-Net ResNet34\nU-Net EfficientNet-B3\n5 folds each", accent=True)
+    t5 = box(81.5, 21, 18, "OOF components,\nmatched-IoU target y,\nLightGBM scorer", accent=True)
+    for a, b in ((t1, t2), (t2, t3), (t3, t4), (t4, t5)):
+        arrow(a, b)
+    i1 = box(0.5, 2, 13, "H-α image\n2048², gray")
+    i2 = box(16.5, 2, 13, "Resize to\n1024²")
+    i3 = box(32.5, 2, 16, "2 models × 5 folds\n× 8 dihedral views\nprob. average", accent=True)
+    i4 = box(51.5, 2, 14, "Threshold 0.3\n8-connected\ncomponents")
+    i5 = box(68.5, 2, 15, "Keep if ŷ > τ\nτ ≈ PQ/2 = 0.23", accent=True)
+    i6 = box(86.5, 2, 13, "Upsample\nto 2048,\nCOCO RLE")
+    for a, b in ((i1, i2), (i2, i3), (i3, i4), (i4, i5), (i5, i6)):
+        arrow(a, b)
+    arrow(t4, i3)
+    arrow(t5, i5)
+    fig.savefig(os.path.join(OUT, "fig_pipeline.png"), dpi=300, bbox_inches="tight", pad_inches=0.03)
+
+
 if __name__ == "__main__":
+    fig_pipeline()
     fig_ablation()
     fig_tau()
     fig_overlay()
