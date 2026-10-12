@@ -7,7 +7,7 @@ Panoptic Quality (PQ). Everything runs on a single 4 GB laptop GPU (RTX 3050).
 
 | Model | 5-fold CV PQ | Public LB |
 |---|---|---|
-| U-Net ResNet34 + U-Net EfficientNet-B3 (crop 768) ensemble + LightGBM instance scorer v2 | **0.432** | 0.35 (v1) |
+| U-Net ResNet34 + U-Net EfficientNet-B3 (crop 768) ensemble + LightGBM instance scorer v2 | **0.432** | **0.36** |
 | U-Net ResNet34, crop 768 + scorer | 0.424 | 0.35 |
 | U-Net ResNet34, crop 512 + scorer | 0.401 | 0.34 |
 | U-Net ResNet34, crop 512, connected components only | 0.386 | 0.33 |

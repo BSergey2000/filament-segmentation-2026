@@ -13,7 +13,7 @@ host's Panoptic Quality (PQ) metric. Our pipeline is a five-fold ensemble of two
 and EfficientNet-B3 encoders) trained on soft annotator-agreement targets at 1024\,px with large
 (768\,px) crops, followed by connected-component instance extraction and a LightGBM instance
 scorer whose keep threshold follows directly from the structure of PQ. On grouped five-fold
-cross-validation the method reaches PQ\,0.432 (public leaderboard 0.35), against 0.340 for one
+cross-validation the method reaches PQ\,0.432 (public leaderboard 0.36), against 0.340 for one
 human annotator scored against another. All training fits a single 4\,GB laptop GPU.
 \end{abstract}
 
