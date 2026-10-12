@@ -8,6 +8,6 @@ run_id,variant,ts_utc,cv_score,cv_std,public_lb,status,submission_file
 2026-10-12-unet-effb3-1024-crop768,lgbm-instance-scorer-t0.3,2026-10-12T04:39:42Z,0.42387,0.0095,,candidate,
 2026-10-12-ens-r34-effb3-768,lgbm-instance-scorer-t0.3,2026-10-12T04:39:42Z,0.42934,0.0127,0.35,submitted,stage2_modeling/runs/2026-10-12-ens-r34-effb3-768/test_preds_scorer.csv
 2026-10-12-ens-r34-effb3-768,lgbm-scorer-v2-t0.3,2026-10-12T09:56:29Z,0.43147,,,candidate,stage2_modeling/runs/2026-10-12-ens-r34-effb3-768/test_preds_scorer_v2.csv
-2026-10-12-ens-r34-effb3-768-tta8,lgbm-scorer-v2-t0.3,2026-10-12T09:56:29Z,0.43165,0.0109,,candidate (best CV),stage2_modeling/runs/2026-10-12-ens-r34-effb3-768-tta8/test_preds_scorer_v2.csv
+2026-10-12-ens-r34-effb3-768-tta8,lgbm-scorer-v2-t0.3,2026-10-12T09:56:29Z,0.43165,0.0109,0.36,submitted (best CV + best LB),stage2_modeling/runs/2026-10-12-ens-r34-effb3-768-tta8/test_preds_scorer_v2.csv
 abl-f0-unetpp-r34-crop768,fold0-only,2026-10-12T09:56:29Z,0.43025,,,abandoned (3-way ens +0.001),
 abl-f0-r34-1536-crop1152,fold0-only,2026-10-12T09:56:29Z,0.42846,,,abandoned (no gain vs 1024),
