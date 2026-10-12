@@ -1,0 +1,18 @@
+{
+ "metric": "panoptic_quality",
+ "per_fold": [
+  0.42846
+ ],
+ "mean": 0.42846,
+ "std": 0.0,
+ "post": {
+  "thr": 0.35,
+  "min_area": 500.0,
+  "keep_thr": 0.8
+ },
+ "tp": 1133,
+ "fp": 555,
+ "fn": 736,
+ "eval_res": 1536,
+ "n_train": 142
+}

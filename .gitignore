@@ -1,0 +1,14 @@
+# data, environment, caches
+runs/*/data/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# large / regenerable artifacts
+*.pt
+*.pkl
+runs/*/stage2_modeling/runs/*/oof/
+runs/*/stage2_modeling/runs/*/test_probs/
+runs/*/stage2_modeling/runs/*/test_preds*.csv
+runs/*/stage2_modeling/runs/*/*.log

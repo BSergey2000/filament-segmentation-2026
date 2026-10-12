@@ -1,0 +1,15 @@
+scheme: GroupKFold
+n_folds: 5
+shuffle: true
+seed: 42
+group_col: stem          # physical JPEG (YYYYMMDDHHMMSSII); all annotator sets of an image stay in one fold
+stratify_col: null
+assignment: >-
+  sorted unique stems shuffled with numpy RandomState(42), fold = position % 5
+  (implemented in pipeline.py::make_folds; persisted to folds.csv on first run)
+rationale: >-
+  Image instance segmentation where each image has 1-3 independent annotation sets.
+  Annotation sets of the same image are near-duplicates, so splitting by annotation set
+  would leak. Grouping by stem keeps them together. Scoring per fold uses the host-exact
+  pooled PQ over all annotation sets (pq.py). User must edit this file (not the agent)
+  to change the scheme.

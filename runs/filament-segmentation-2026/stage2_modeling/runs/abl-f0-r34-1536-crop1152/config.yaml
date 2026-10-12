@@ -1,0 +1,35 @@
+run_id: abl-f0-r34-1536-crop1152
+template: custom
+task_type: image-instance-segmentation
+metric: panoptic_quality
+cv_scheme: GroupKFold(5) by stem (cv_split.yaml)
+idea_keys:
+  - cv:grouped-by-observation-split
+  - cv:exact-host-pq-evaluator
+  - feature:soft-annotator-mean-target
+  - model:native-resolution-semantic-unet-plus-cc
+  - loss:bce-plus-soft-dice
+  - post:metric-aware-instance-inclusion
+  - post:min-area
+  - aug:dihedral-tta
+data:
+  res: 1536
+model:
+  arch: Unet
+  encoder: resnet34
+  weights: imagenet
+train:
+  folds: [0]
+  seed: 42
+  crop: 1152
+  batch: 2
+  epochs: 30
+  samples_per_epoch: 1200
+  lr: 0.0005
+  dice_w: 0.5
+infer:
+  tta: 4
+tune:
+  thr: [0.35, 0.4, 0.45, 0.5, 0.55]
+  min_area: [300, 500, 800]
+  keep_thr: [0.0, 0.7, 0.8]
